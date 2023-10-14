@@ -1,1 +1,36 @@
-<p>edit-person works!</p>
+<form [formGroup]="form">
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <!-- <input type="text" id="rut" formControlName="rut" placeholder="Rut" pInputText> -->
+        <p-inputMask characterPattern="[0-9kK]" [style]="{'width':'100%'}" p-inputMask mask="99.999.999-*" formControlName="rutDni"  placeholder="12.345.678-9" ></p-inputMask>
+      </div>
+      <div class="col-12 md:col-6">
+        <input type="text" id="nombres" formControlName="nombres" placeholder="nombres" pInputText>
+      </div>
+      <div class="col-12 md:col-6">
+        <input type="text" id="apellidoPaterno" formControlName="apellidoPaterno" placeholder="apellidoPaterno" pInputText>
+      </div>
+      <div class="col-12 md:col-6">
+        <input type="text" id="apellidoMaterno" formControlName="apellidoMaterno" placeholder="apellidoMaterno" pInputText>
+      </div>
+      <div class="col-12 md:col-6">
+        <input type="text" id="nombreCalle" formControlName="nombreCalle" placeholder="nombreCalle" pInputText>
+      </div>
+      <div class="col-12 md:col-6">
+        <input type="number" id="numero" formControlName="numero" placeholder="numero" pInputText>
+      </div>
+      <div class="col-12 md:col-12">
+        <input type="text" id="restoDireccion" formControlName="restoDireccion" placeholder="restoDireccion" pInputText>
+      </div>
+      <div class="col-12 md:col-12">
+        <input type="email" id="correo" formControlName="correo" placeholder="Email@email.com" pInputText>
+      </div>
+      <div class="col-12 md:col-12">
+        <p-calendar  class="max-w-full" [inline]="true" formControlName="fechaNacimiento" dateFormat="yy-mm-dd"></p-calendar>
+      </div>
+    </div>
+    <div class="col-12">
+      <p-button label="Guardar" (onClick)="Actualizar()"></p-button>
+    </div>
+  </form>
+  

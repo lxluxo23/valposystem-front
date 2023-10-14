@@ -32,6 +32,45 @@ export class PersonService {
     
     }
   }
+
+  async Eliminar(id: any) {
+    try {
+      const res = await axios.delete(environment.API + 'person/' + id, {
+        responseType: 'json',
+      });
+      if (res.status == 200) {
+        return res.data
+      }
+    } catch (err) {
+      this.Errores(err);
+    }
+  }
+
+  async TraerID(id: any) {
+    try {
+      const res = await axios.get(environment.API + 'person/' + id, {
+        responseType: 'json',
+      });
+      if (res.status == 200) {
+        return res.data;
+      }
+    } catch (err) {
+      this.Errores(err);
+    }
+  }
+
+  async Modificar(persona:any) {
+    try {
+      const res = await axios.put(environment.API + `person/${persona.id}`,persona, {
+        responseType: 'json',
+      });
+      if (res.status == 200) {
+        return res.data;
+      }
+    } catch (err) {
+      this.Errores(err);
+    }
+  }
   Errores(error:any) {
     console.error(error);
     Swal.close();

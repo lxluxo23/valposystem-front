@@ -5,6 +5,8 @@ import { AddPersonComponent } from './add-person/add-person.component';
 import { EditPersonComponent } from './edit-person/edit-person.component';
 import { PersonRoutingModule } from './person-routing.module';
 import { PrimeNgModule } from '../PrimeNg.module';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,10 @@ import { PrimeNgModule } from '../PrimeNg.module';
   imports: [
     CommonModule,
     PersonRoutingModule,
-    PrimeNgModule
+    PrimeNgModule,
+    DynamicDialogModule,
+    ReactiveFormsModule  
+    
   ],
   exports:[
     ListPersonComponent,

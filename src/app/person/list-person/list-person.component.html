@@ -1,9 +1,16 @@
 <p-toast></p-toast>
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple  label="Nuevo" icon="pi pi-plus"
+        class="p-button-success p-mr-2" (click)="Agregar()"></button>
+    </ng-template>
+  </p-toolbar>
 
 <p-table #dt1 [value]="personas" [paginator]="true" [rows]="50" [showCurrentPageReport]="true"
-  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} personas" [rowsPerPageOptions]="[20, 50, 100]">
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} personas" [rowsPerPageOptions]="[20, 50, 100]"
+  [globalFilterFields]="['nombres','rutDni','correo','apellidoPaterno','apellidoMaterno']">
 
-  <!-- <ng-template pTemplate="caption">
+  <ng-template pTemplate="caption">
     <div class="p-d-flex">
       <span class="p-input-icon-left p-ml-auto">
         <i class="pi pi-search"></i>
@@ -11,7 +18,7 @@
           searchInput.value, 'contains')" placeholder="Buscar" />
       </span>
     </div>
-  </ng-template> -->
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th>ID</th>
@@ -24,6 +31,7 @@
       <th>Resto dirección</th>
       <th>Correo</th>
       <th>Fecha Nacimiento</th>
+      <th>Acciones</th>
     </tr>
   </ng-template>
 
@@ -41,9 +49,9 @@
       <td><span class="p-column-title">Fecha nacimiento</span>{{ persona.fechaNacimiento }}</td>
       <td>
         <button pButton icon="pi pi-file-edit" pTooltip="Editar" class="button_color_primary" style="background-color:rgb(37, 199, 228)"
-          ></button>
+        (click)="editarUsuario(persona.id)" ></button>
         <button pButton icon="pi pi-delete-left" pTooltip="Eliminar" class="button_color_primary" style="background-color:rgb(239, 32, 32)"
-         ></button>
+        (click)="EliminarUsuario(persona.id)"></button>
           
       </td>
 
