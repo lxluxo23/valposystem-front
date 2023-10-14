@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AlertHelper } from 'src/app/helpers/alert.helpers';
+import { Person } from 'src/app/models/person.model';
 import { PersonService } from 'src/app/services/person.service';
 
 @Component({
@@ -9,8 +11,9 @@ import { PersonService } from 'src/app/services/person.service';
   styleUrls: ['./list-person.component.scss']
 })
 export class ListPersonComponent implements OnInit {
-
+  personas: Person[]
   constructor(
+   
     private servicio:PersonService,
     private mensajes: MessageService,
     private router: Router
@@ -21,8 +24,9 @@ export class ListPersonComponent implements OnInit {
 
   async Traerdatos(){
  
-    let respuesta = await this.servicio.TraerTodos();
-    console.log(respuesta);
+    this.personas = await this.servicio.TraerTodos();
+    console.log(this.personas);
+    
   }
 
 }
