@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API:'https://backend.myccontadores.cl/'
+  API:'http://localhost:8080/api/'
 };
