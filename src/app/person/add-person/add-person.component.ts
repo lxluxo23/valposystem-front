@@ -12,26 +12,39 @@ import { PersonService } from 'src/app/services/person.service';
 })
 export class AddPersonComponent {
   form = this.Fb.group({
-    id: [''], 
     rutDni: ['', Validators.required],
     nombres: ['', Validators.required],
     apellidoPaterno: ['', Validators.required],
-    apellidoMaterno: ['',Validators.required],
-    nombreCalle: ['',Validators.required],
-    numero: ['',Validators.required],
-    restoDireccion: ['',Validators.required],
+    apellidoMaterno: ['', Validators.required],
+    nombreCalle: ['', Validators.required],
+    numero: ['', Validators.required],
+    restoDireccion: ['', Validators.required],
     correo: ['', [Validators.required, Validators.email]],
-    fechaNacimiento: ['',Validators.required]
+    fechaNacimiento: ['', Validators.required]
   })
   constructor(
-    private config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
     private Fb: FormBuilder,
-    private alert: AlertHelper,
     public dialogService: DialogService,
     private mensajes: MessageService,
     private servicio: PersonService
-  ){
+  ) {
+
+  }
+
+  async agregar() {
+
+    if (this.form.valid) {
+      await this.servicio.Crear(this.form.value).then((res) => {
+        this.mensajes.add({ severity: 'success', summary: res })
+        this.ref.close()
+      }).catch((err) => {
+        this.mensajes.add({ severity: 'error', summary: err.response.data })
+      })
+    }
+    else {
+      this.mensajes.add({ severity: 'error', summary: 'revise formulario' })
+    }
 
   }
 }

@@ -6,14 +6,14 @@ import Swal from 'sweetalert2';
 import { AlertHelper } from '../helpers/alert.helpers';
 @Injectable({
   providedIn: 'root',
-  
+
 })
 export class PersonService {
 
   constructor(
     private alert: AlertHelper,
     private mensajes: MessageService,
-    
+
   ) { }
 
   async TraerTodos() {
@@ -29,7 +29,7 @@ export class PersonService {
       }
     } catch (err) {
       this.Errores(err);
-    
+
     }
   }
 
@@ -59,22 +59,24 @@ export class PersonService {
     }
   }
 
-  async Modificar(persona:any) {
-    try {
-      const res = await axios.put(environment.API + `person/${persona.id}`,persona, {
-        responseType: 'json',
-      });
-      if (res.status == 200) {
-        return res.data;
-      }
-    } catch (err) {
-      this.Errores(err);
-    }
+  async Crear(body: any) {
+    const res = await axios.post(environment.API + 'person/', body);
+    return res.data;
   }
-  Errores(error:any) {
+
+  async Modificar(persona: any) {
+
+    const res = await axios.put(environment.API + `person/${persona.id}`, persona, {
+      responseType: 'json',
+    });
+    return res.data;
+
+
+  }
+  Errores(error: any) {
     console.error(error);
     Swal.close();
     this.mensajes.add({ severity: 'error', summary: error });
-  
+
   }
 }
