@@ -25,7 +25,8 @@
             ],
             "allowedCommonJsDependencies": [
               "quill",
-              "sweetalert2"
+              "sweetalert2",
+              "rutlib"
            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
