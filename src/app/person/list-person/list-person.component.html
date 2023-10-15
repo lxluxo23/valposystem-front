@@ -38,7 +38,7 @@
   <ng-template pTemplate="body" let-persona>
     <tr>
       <td><span class="p-column-title">ID</span>{{ persona.id }}</td>
-      <td><span class="p-column-title">RUT</span>{{ persona.rutDni }}</td>
+      <td><span class="p-column-title">RUT</span>{{ persona.rutDni | formatoRut}}</td>
       <td><span class="p-column-title">Nombres</span>{{ persona.nombres }}</td>
       <td><span class="p-column-title">Apellido Paterno</span>{{ persona.apellidoPaterno }}</td>
       <td><span class="p-column-title">Apellido Materno</span>{{ persona.apellidoMaterno }}</td>

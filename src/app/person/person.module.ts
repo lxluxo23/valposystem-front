@@ -7,12 +7,14 @@ import { PersonRoutingModule } from './person-routing.module';
 import { PrimeNgModule } from '../PrimeNg.module';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormatoRutPipe } from '../pipes/formato-rut.pipe';
 
 @NgModule({
   declarations: [
     ListPersonComponent,
     AddPersonComponent,
-    EditPersonComponent
+    EditPersonComponent,
+    FormatoRutPipe
   ],
   imports: [
     CommonModule,

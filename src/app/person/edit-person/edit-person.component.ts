@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { cleanRut } from 'rutlib';
 import { AlertHelper } from 'src/app/helpers/alert.helpers';
 import { PersonService } from 'src/app/services/person.service';
 
@@ -43,8 +44,12 @@ export class EditPersonComponent implements OnInit {
   async TraerDatos(id: number) {
     await this.servicio.TraerID(id).then((res) => {
 
+      let rut = res.rutDni;
+      if (rut.length === 8) {
+        rut = '0' + rut;
+      }
       this.form.get("id").setValue(res.id)
-      this.form.get("rutDni").setValue(res.rutDni)
+      this.form.get("rutDni").setValue(rut)
       this.form.get("nombres").setValue(res.nombres)
       this.form.get("apellidoPaterno").setValue(res.apellidoPaterno)
       this.form.get("apellidoMaterno").setValue(res.apellidoMaterno)
@@ -61,6 +66,13 @@ export class EditPersonComponent implements OnInit {
 
   async Actualizar() {
     if (this.form.valid) {
+
+      const rut = this.form.get('rutDni').value;
+      let rutlimpio = cleanRut(rut);
+      if (rutlimpio.charAt(0) === '0') {
+        rutlimpio = rutlimpio.substring(1);
+      }
+      this.form.get('rutDni').setValue(rutlimpio.toLocaleUpperCase());
       await this.servicio.Modificar(this.form.value).then((res) => {
 
         this.mensajes.add({ severity: 'success', summary: res })

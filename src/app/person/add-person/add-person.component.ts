@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { cleanRut } from 'rutlib';
 import { AlertHelper } from 'src/app/helpers/alert.helpers';
 import { PersonService } from 'src/app/services/person.service';
 
@@ -35,6 +36,12 @@ export class AddPersonComponent {
   async agregar() {
 
     if (this.form.valid) {
+      const rut = this.form.get('rutDni').value;
+      let rutlimpio = cleanRut(rut);
+      if (rutlimpio.charAt(0) === '0') {
+        rutlimpio = rutlimpio.substring(1);
+      }
+      this.form.get('rutDni').setValue(rutlimpio.toLocaleUpperCase());
       await this.servicio.Crear(this.form.value).then((res) => {
         this.mensajes.add({ severity: 'success', summary: res })
         this.ref.close()
